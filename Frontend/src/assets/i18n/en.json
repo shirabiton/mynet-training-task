@@ -1,0 +1,19 @@
+{
+    "HEADER": {
+        "TITLE": "Shopping",
+        "LABEL": "Go to Home"
+    },
+    "FOOTER": {
+        "COPYRIGHT": "All rights reserved | 2025 ©"
+    },
+    "LANGUAGE_SWITCHER": {
+        "OTHER_LANGUAGE": "עברית"
+    },
+    "ITEM_NOT_FOUND": {
+        "TEXT": "Item does not exist"
+    },
+    "NOT_FOUND": {
+        "TEXT": "Oops... the page you were looking for does not exist :(",
+        "BUTTON_TEXT": "Go to Home"
+    }
+}

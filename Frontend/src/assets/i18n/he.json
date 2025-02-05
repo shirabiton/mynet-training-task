@@ -1,0 +1,19 @@
+{
+    "HEADER": {
+        "TITLE": "אתר קניות",
+        "LABEL": "לדף הבית"
+    },
+    "FOOTER": {
+        "COPYRIGHT": "© כל הזכויות שמורות | 2025"
+    },
+    "LANGUAGE_SWITCHER": {
+        "OTHER_LANGUAGE": "English"
+    },
+    "ITEM_NOT_FOUND": {
+        "TEXT": "פריט לא קיים"
+    },
+    "NOT_FOUND": {
+        "TEXT": "אופס... הדף שחיפשת לא קיים :(",
+        "BUTTON_TEXT": "לדף הבית"
+    }
+}
