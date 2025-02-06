@@ -14,6 +14,7 @@ type MetaData = {
 }
 
 export type Item = {
+    _id: string;
     thumbnails: LQIPMedia;
     content: LQIPMedia;
     title: string;
