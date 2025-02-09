@@ -8,11 +8,13 @@ ItemRouter.get(
     "",
     wrapController(ItemController.getAll)
 ),
-ItemRouter.get(
-    "/items",
-    wrapController(ItemController.getAll)
-),
-ItemRouter.get(
-    "/items:itemId",
-    wrapController(ItemController.getItemById)
-)
+    ItemRouter.get(
+        "/items",
+        wrapController(ItemController.getAll)
+    ),
+    ItemRouter.get(
+        "/items:itemId",
+        wrapController(ItemController.getItemById)
+    )
+
+export default ItemRouter;

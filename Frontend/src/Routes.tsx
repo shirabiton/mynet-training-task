@@ -1,9 +1,9 @@
 import { lazy, Suspense } from "react";
 import { Navigate, RouteObject, useRoutes } from "react-router-dom";
-import Header from "./components/header";
+import Footer from "./components/Footer/Footer";
+import Header from "./components/Header";
 import PrivateRouter from "./PrivateRouter";
 import { ROUTES_NAMES } from "./utils/globalConsts";
-import Footer from "./components/Footer/Footer";
 
 const ItemsPage = lazy(() => import("./pages/ItemsPage"));
 const ItemDetailsPage = lazy(() => import("./pages/ItemDetailsPage"));
