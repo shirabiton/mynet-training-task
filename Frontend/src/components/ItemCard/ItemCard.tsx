@@ -1,11 +1,11 @@
 import { FC, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Item from "../../types/item.type";
+import { Item } from "../../../../Libs/src/types/DB/item.type";
 import ItemImage from "../ItemImage";
 import { handleItemClick } from "./functions";
 import useStyles from "./styles";
 
-const ItemCard: FC<{ item: Item, index: number }> = ({ item, index }) => {
+const ItemCard: FC<{ item: Item }> = ({ item }) => {
     const navigate = useNavigate();
 
     const [isAnimated, setIsAnimated] = useState(false);
@@ -14,7 +14,7 @@ const ItemCard: FC<{ item: Item, index: number }> = ({ item, index }) => {
     const elementRef = useRef<HTMLDivElement>(null);
     const classes = useStyles({ topPosition: topPosition, leftPosition: leftPosition });
 
-    return <span onClick={() => handleItemClick(index, elementRef.current || null, navigate, setLeftPosition, setTopPosition, setIsAnimated)} key={index} className={`${classes.cardContainer} ${isAnimated ? classes.animated : ''}`}>
+    return <span onClick={() => handleItemClick(item._id, elementRef.current || null, navigate, setLeftPosition, setTopPosition, setIsAnimated)} key={item._id} className={`${classes.cardContainer} ${isAnimated ? classes.animated : ''}`}>
         <span className={classes.cardContent}>
             <span className={classes.itemText}>
                 <h1>{item.title}</h1>

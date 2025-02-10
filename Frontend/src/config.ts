@@ -1,4 +1,4 @@
-const localItemServicePort = 3000;
+const localItemServicePort = 3001;
 const getServerHost = (port: number) => `http://localhost:${port}`;
 
 const config = {

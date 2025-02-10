@@ -13,7 +13,7 @@ const AppRoutes: React.FC = () => {
 
     const routes: RouteObject[] = [{ path: `${ROUTES_NAMES.HOME}`, element: <Navigate to={ROUTES_NAMES.ITEM_LIST} /> },
     { path: `${ROUTES_NAMES.ITEM_LIST}`, element: <PrivateRouter component={ItemsPage} /> },
-    { path: `${ROUTES_NAMES.ITEM_LIST}/:index`, element: <PrivateRouter component={ItemDetailsPage} /> },
+    { path: `${ROUTES_NAMES.ITEM_LIST}/:itemId`, element: <PrivateRouter component={ItemDetailsPage} /> },
     { path: '/*', element: <PrivateRouter component={NotFoundPage} /> }
     ]
 

@@ -1,4 +1,4 @@
-export const handleItemClick = (index: number, elementRef: HTMLDivElement | null,
+export const handleItemClick = (itemId: string, elementRef: HTMLDivElement | null,
     navigate: (to: string, options?: { replace?: boolean; state?: unknown }) => void, setLeftPosition: React.Dispatch<React.SetStateAction<number>>,
     setTopPosition: React.Dispatch<React.SetStateAction<number>>, setIsAnimated: React.Dispatch<React.SetStateAction<boolean>>) => {
 
@@ -13,7 +13,7 @@ export const handleItemClick = (index: number, elementRef: HTMLDivElement | null
         behavior: 'smooth'
     })
     setTimeout(() => {
-        navigate(`/items/${index}`);
+        navigate(`/items/${itemId}`);
         setIsAnimated(false);
     }, 100);
 }

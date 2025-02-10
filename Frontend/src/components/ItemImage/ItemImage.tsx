@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from "react";
-import LQIPMedia from "../../types/lqip-media.type";
+import { LQIPMedia } from "../../../../Libs/src/types/DB/item.type";
 import useStyles from "./styles";
 
 const ItemImage: FC<{ image: LQIPMedia, title: string }> = ({ image, title }) => {

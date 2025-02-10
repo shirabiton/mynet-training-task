@@ -1,16 +1,23 @@
-import { FC, useContext } from "react";
+import { FC, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ItemImage from "../../components/ItemImage";
-import { ItemsContext } from "../../contexts/ItemContext/ItemsContext";
 import useStyles from "./styles";
 import { useTranslation } from "react-i18next";
+import axios from "axios";
+import { Item } from "../../../../Libs/src/types/DB/item.type";
 
 const ItemDetailsPage: FC = () => {
-    const { index } = useParams();
+    const { itemId } = useParams();
     const classes = useStyles();
-    const items = useContext(ItemsContext);
-    const currentItem = items[Number(index)];
     const { t } = useTranslation("translation", { keyPrefix: "ITEM_NOT_FOUND" });
+    const [currentItem, setCurrentItem] = useState<Item | null>(null);
+    useEffect(() => {
+        const fetchItemById = async () => {
+            const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL || "http://localhost:3000"}/items/${itemId}`);
+            setCurrentItem(response.data);
+        }
+        fetchItemById();
+    }, [itemId])
 
     return <div className={classes.singleItemContainer}>
         {currentItem ?

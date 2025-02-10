@@ -1,8 +1,7 @@
-import Item from "../../types/item.type";
+import axios from "axios";
+import { Item } from "../../../../Libs/src/types/DB/item.type";
 
-export const fetchItems = (setItems: (items: React.SetStateAction<Item[]>) => void) => {
-    fetch('/items.mockup.json')
-        .then((response) => response.json())
-        .then((data) => setItems(data.items))
-        .catch((error) => console.error('Error fetching data:', error));
+export const fetchItems = async (): Promise<Item[]> => {
+    const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL || "http://localhost:3000"}/items`) || [];
+    return response.data;
 }

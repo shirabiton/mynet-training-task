@@ -5,10 +5,9 @@ import "./i18n";
 import Routes from "./Routes";
 
 function App() {
-
   return <ItemsProvider>
     <BrowserRouter>
-        <Routes />
+      <Routes />
     </BrowserRouter>
   </ItemsProvider>
 }

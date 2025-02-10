@@ -1,15 +1,11 @@
-import { FC, ReactNode, useEffect, useState } from 'react';
-import Item from '../../types/item.type';
-import { fetchItems } from './functions';
+import { useQuery } from '@tanstack/react-query';
+import { FC, ReactNode } from 'react';
+import { Item } from '../../../../Libs/src/types/DB/item.type';
 import { ItemsContext } from './ItemsContext';
+import { fetchItems } from './functions';
 
 const ItemsProvider: FC<{ children: ReactNode }> = ({ children }) => {
-  const [items, setItems] = useState<Item[]>([]);
-
-  useEffect(() => {
-    fetchItems(setItems);
-  }, []);
-
+  const { data: items = [] } = useQuery<Item[]>({ queryKey: ['items'], queryFn: fetchItems });
   return <ItemsContext.Provider value={items}>
     {children}
   </ItemsContext.Provider>
