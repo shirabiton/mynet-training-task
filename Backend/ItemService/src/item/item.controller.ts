@@ -6,5 +6,5 @@ export const ItemController = {
     getAll: async (req: Request, res: Response): Promise<void> => void
         res.status(HttpStatusCode.Ok).json(await ItemManager.getAll()),
     getItemById: async (req: Request, res: Response): Promise<void> => void
-        res.status(HttpStatusCode.Ok).json(await ItemManager.getItemById(req.params.id))
+        res.status(HttpStatusCode.Ok).json(await ItemManager.getItemById(req.params.itemId))
 }

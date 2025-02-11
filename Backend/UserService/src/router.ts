@@ -1,8 +1,8 @@
 import { Router } from "express";
-import ItemRouter from "./item/item.router";
+import UserRouter from "./user/user.router";
 
 const AppRouter: Router = Router();
 
-AppRouter.use("/items", ItemRouter);
+AppRouter.use("/users", UserRouter);
 
 export default AppRouter;

@@ -1,18 +1,14 @@
-import axios from 'axios';
-import { Item } from './../../../../Libs/src/types/DB/item.type';
+import { Item } from '@Libs/types/DB/item.type';
+import fs from 'fs';
 
 export const ItemRepository = {
     getAll: async (): Promise<Item[]> => {
-        console.log("in: itemRepository/getAll");
-        const res = await axios.get('http://localhost:3000/Backend/itemService/public/mocks/items.json');
-        console.log("res: 🥺", res);
-
-        return res.data;
-        // .catch((err: unknown) => { throw err });
-
-        // return (await axios.get('mocks/items.json')).data.catch((err: unknown) => { throw err });
+        const data = fs.readFileSync('./src/mocks/items.json', 'utf8');
+        const parsedData = JSON.parse(data);
+        return parsedData.data;
     },
-    getItemById: async (id: string): Promise<Item> => {
-        return (await axios.get('mocks/items.json')).data.find((item: Item) => item._id === id).catch((err: unknown) => { throw err });
+    getItemById: async (id: string): Promise<Item | null> => {
+        const items = await ItemRepository.getAll() || [];
+        return items.find((item: Item) => item._id === id) || null;
     }
 }

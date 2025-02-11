@@ -4,6 +4,7 @@ import Footer from "./components/Footer/Footer";
 import Header from "./components/Header";
 import PrivateRouter from "./PrivateRouter";
 import { ROUTES_NAMES } from "./utils/globalConsts";
+import Login from "./components/Login/Login";
 
 const ItemsPage = lazy(() => import("./pages/ItemsPage"));
 const ItemDetailsPage = lazy(() => import("./pages/ItemDetailsPage"));
@@ -21,6 +22,7 @@ const AppRoutes: React.FC = () => {
 
     return <>
         <Header />
+        <Login />
         <Suspense fallback={<></>}>{routesElement}</Suspense>
         <Footer />
     </>;

@@ -3,7 +3,7 @@ type Quality = {
     lowResolution: string;
 }
 
-type LQIPMedia = {
+export type LQIPMedia = {
     highQuality: Quality;
     lowQuality: Quality;
 };
