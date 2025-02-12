@@ -13,7 +13,7 @@ const ItemDetailsPage: FC = () => {
     const [currentItem, setCurrentItem] = useState<Item | null>(null);
     useEffect(() => {
         const fetchItemById = async () => {
-            const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL || "http://localhost:3000"}/items/${itemId}`);
+            const response = await axios.get(`${import.meta.env.VITE_ITEM_BASE_URL || "http://localhost:3001"}/items/${itemId}`);
             setCurrentItem(response.data);
         }
         fetchItemById();

@@ -1,10 +1,12 @@
-const localItemServicePort = 3001;
-const getServerHost = (port: number) => `http://localhost:${port}`;
+// const getServerHost = (port: number) => `http://localhost:${port}`;
 
 const config = {
     endpoints: {
         item: {
-            api: `${getServerHost(localItemServicePort)}/api/items`
+            api: `${import.meta.env.VITE_ITEM_BASE_URL}/items`
+        },
+        user: {
+            api: `${import.meta.env.VITE_USER_BASE_URL}/users`
         }
     }
 }

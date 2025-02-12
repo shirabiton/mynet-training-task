@@ -1,16 +1,19 @@
 import { Router } from "express";
-import { wrapController } from './../../../../Libs/src/utils/helper/wrapper';
+import { wrap } from './../../../../Libs/src/utils/helper/wrapper';
+import { verifyToken } from './../../../../Libs/src/utils/jwt/jwt';
 import { ItemController } from './item.controller';
 
 const ItemRouter: Router = Router();
 
 ItemRouter.get(
     "",
-    wrapController(ItemController.getAll)
+    verifyToken,
+    wrap(ItemController.getAll)
 ),
     ItemRouter.get(
         "/:itemId",
-        wrapController(ItemController.getItemById)
+        verifyToken,
+        wrap(ItemController.getItemById)
     )
 
 export default ItemRouter;

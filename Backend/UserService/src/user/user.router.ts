@@ -1,24 +1,28 @@
 import { Router } from "express";
-import { wrapController } from './../../../../Libs/src/utils/helper/wrapper';
+import { wrap } from './../../../../Libs/src/utils/helper/wrapper';
 import { UserController } from "./user.controller";
 
 const UserRouter: Router = Router();
 
 UserRouter.get(
     "",
-    wrapController(UserController.getAll)
+    wrap(UserController.getAll)
 ),
     UserRouter.get(
         "/:userId",
-        wrapController(UserController.getUserById)
+        wrap(UserController.getUserById)
     ),
     UserRouter.get(
         "/email/:userEmail",
-        wrapController(UserController.getUserByEmail)
+        wrap(UserController.getUserByEmail)
     ),
     UserRouter.get(
         "/signin/:userId",
-        wrapController(UserController.signIn)
+        wrap(UserController.signIn)
+    ),
+    UserRouter.get(
+        '/verify-token',
+        wrap(UserController.verifyTokenn)
     )
 
 export default UserRouter;

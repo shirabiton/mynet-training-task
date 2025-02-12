@@ -1,15 +1,17 @@
+import axios from 'axios';
 import config from '../config';
-import HttpClient from '../utils/middlewares/http.client';
 import { Item } from './../../../Libs/src/types/DB/item.type';
 
 const { api } = config.endpoints.item;
 
 const ItemService = {
-    getItems: (): Promise<Item[]> => {
-        return HttpClient.get(`${api}/items`);
+    getItems: async (): Promise<Item[]> => {
+        const res = await axios.get(`${api}`);
+        return res.data;
     },
-    getItemById: (id: string): Promise<Item> => {
-        return HttpClient.get(`${api}/items/:${id}`);
+    getItemById: async (id: string): Promise<Item> => {
+        const res = await axios.get(`${api}/:${id}`);
+        return res.data;
     }
 }
 export default ItemService;
