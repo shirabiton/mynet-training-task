@@ -6,11 +6,13 @@ const { api } = config.endpoints.item;
 
 const ItemService = {
     getItems: async (): Promise<Item[]> => {
+        console.log("api url:", api);
         const res = await axios.get(`${api}`);
+        console.log("on get items in frontend service, res:", res);
         return res.data;
     },
     getItemById: async (id: string): Promise<Item> => {
-        const res = await axios.get(`${api}/:${id}`);
+        const res = await axios.get(`${api}/${id}`);
         return res.data;
     }
 }
