@@ -1,8 +1,8 @@
 import { Router } from "express";
-import ItemRouter from "./item/item.router";
+import GatewayRouter from "./gateway/gateway.router";
 
 const AppRouter: Router = Router();
 
-AppRouter.use("", ItemRouter);
+AppRouter.use("", GatewayRouter);
 
 export default AppRouter;

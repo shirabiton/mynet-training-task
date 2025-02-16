@@ -1,20 +1,31 @@
-import { FC, useContext, useState } from "react";
+import { FC, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { handleSubmit } from "./functions";
-import UserContext from "../../contexts/UserContext";
 
 const LoginPage: FC = () => {
-    // transfer text to translate!
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const { setCurrentUser } = useContext(UserContext);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { t } = useTranslation("translation", { keyPrefix: "LOGIN" });
 
-    return <>
-        <h1>התחברות</h1>
-        <form onSubmit={(e) => handleSubmit(e, email, password, setCurrentUser)}>
-            <input type="text" placeholder="דוא&quot;ל" value={email} onChange={(e) => setEmail(e.target.value)} />
-            <input type="password" placeholder="סיסמה" value={password} onChange={(e) => setPassword(e.target.value)} />
-            <button type="submit">התחבר</button>
-        </form>
+  return (
+    <>
+      <h1>{t("TITLE")}</h1>
+      <form onSubmit={(e) => handleSubmit(e, email, password)}>
+        <input
+          type="text"
+          placeholder={t("EMAIL_LABEL")}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+          type="password"
+          placeholder={t("PASSWORD_LABEL")}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <button type="submit">{t("LOGIN_BUTTON")}</button>
+      </form>
     </>
-}
+  );
+};
 export default LoginPage;

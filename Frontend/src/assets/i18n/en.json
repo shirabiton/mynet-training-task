@@ -1,10 +1,18 @@
 {
     "HEADER": {
         "TITLE": "Shopping",
-        "LABEL": "Go to Home"
+        "LABEL": "Go to Home",
+        "WELCOME_MESSAGE": "Hi, ",
+        "GUEST_NAME": "Guest"
     },
     "FOOTER": {
         "COPYRIGHT": "All rights reserved | 2025 ©"
+    },
+    "LOGIN":{
+        "TITLE":"Login",
+        "EMAIL_LABEL":"Email",
+        "PASSWORD_LABEL":"Password",
+        "LOGIN_BUTTON":"Log in"
     },
     "LANGUAGE_SWITCHER": {
         "OTHER_LANGUAGE": "עברית"

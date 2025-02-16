@@ -1,29 +1,32 @@
-import { createUseStyles } from 'react-jss';
+import { createUseStyles } from "react-jss";
 
 const useStyles = createUseStyles({
-  '@global': {
+  "@global": {
     header: {
-      backgroundColor: 'black',
-      color: 'white',
-      minHeight: '8vh',
-      margin: '0 0 1vw 0',
-      '& p': {
-        margin: 0,
-        padding: '2rem',
-        cursor: 'pointer',
-        fontWeight: '500',
-        fontSize: '1.3rem',
-        display: 'inline-block',
+      backgroundColor: "black",
+      color: "white",
+      minHeight: "8vh",
+      margin: "0 0 1vw 0",
+      '& p':{
+        fontSize:'1rem'
       }
-    }
+    },
   },
   headerContent: {
-    width: '80%',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    margin: '0 auto'
-  }
-})
+    width: "80%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    margin: "0 auto",
+  },
+  logo: {
+    margin: 0,
+    padding: "2rem",
+    cursor: "pointer",
+    fontWeight: "500",
+    fontSize: "1.3rem",
+    display: "inline-block",
+  },
+});
 
 export default useStyles;

@@ -1,4 +1,7 @@
-import { initApp } from '../../../Libs/src/server/index';
+import { initApp } from "../../../Libs/src/server/index";
 import AppRouter from "./router";
+import express from "express";
 
-initApp(AppRouter, Number(process.env.PORT) | 3001);
+const app = express();
+
+initApp(Number(process.env.PORT) | 3001, app, AppRouter);

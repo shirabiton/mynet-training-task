@@ -1,10 +1,18 @@
 {
     "HEADER": {
         "TITLE": "אתר קניות",
-        "LABEL": "לדף הבית"
+        "LABEL": "לדף הבית",
+        "WELCOME_MESSAGE": "היי, ",
+        "GUEST_NAME": "אורח"
     },
     "FOOTER": {
         "COPYRIGHT": "© כל הזכויות שמורות | 2025"
+    },
+    "LOGIN":{
+        "TITLE":"התחברות",
+        "EMAIL_LABEL":"דוא\"ל",
+        "PASSWORD_LABEL":"סיסמה",
+        "LOGIN_BUTTON":"התחבר"
     },
     "LANGUAGE_SWITCHER": {
         "OTHER_LANGUAGE": "English"

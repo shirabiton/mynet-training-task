@@ -1,4 +1,4 @@
 export type styleProp = {
-    topPosition: number,
-    leftPosition: number
-}
+  topPosition: number;
+  leftPosition: number;
+};

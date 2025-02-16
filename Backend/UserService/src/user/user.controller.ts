@@ -1,6 +1,6 @@
+import { User } from "@Libs/types/DB/user.types";
 import { HttpStatusCode } from "axios";
 import { Request, Response } from "express";
-import jsonwebtoken from "jsonwebtoken";
 import { UserManager } from "./user.manager";
 
 export const UserController = {
@@ -21,44 +21,55 @@ export const UserController = {
   },
 
   signIn: async (req: Request, res: Response): Promise<void> => {
-    const { sign } = jsonwebtoken;
-    const { userId } = req.params;
-    if (!userId) {
+    const email = req.body.email;
+    const password = req.body.password.trim().toLowerCase();
+    const userByEmail: User | null = await UserManager.getUserByEmail(email);
+
+    if (!userByEmail) {
       res
         .status(HttpStatusCode.BadRequest)
-        .json({ error: "User id is required" });
+        .json({ error: "Email does not exist" });
       return;
     }
 
-    const secretKey = process.env.JWT_SECRET_KEY;
-    if (!secretKey) {
+    if (userByEmail.password !== password) {
       res
-        .status(HttpStatusCode.InternalServerError)
-        .json({ error: "JWT secret key is not defined" });
+        .status(HttpStatusCode.Unauthorized)
+        .json({ error: "Invalid email or password" });
       return;
+    } else {
+      const token = await UserManager.generateToken(userByEmail._id);
+
+      res.cookie("token", token, {
+        httpOnly: true,
+        sameSite: "none",
+        secure: true,
+      });
+
+      res.cookie("current-user-name", userByEmail.fullName, {
+        sameSite: "none",
+        secure: true,
+      });
+
+      res.status(HttpStatusCode.Ok).json({ user: userByEmail });
     }
-
-    const token = sign({ userId }, secretKey);
-    // const token = sign({ userId }, secretKey, { expiresIn: "1h" });
-    console.log("before cookies");
-
-    res.cookie("token", token, {
-      httpOnly: true,
-      sameSite: "none",
-      secure: true,
-      // domain: "localhost",
-    });
-
-    console.log("created token", token);
-    console.log("Cookies in request:", req.cookies);
-    res.status(HttpStatusCode.Ok).json({ success: true });
   },
 
   verifyToken: async (req: Request, res: Response): Promise<void> => {
-    console.log("yay in verify token");
-    console.log("Cookies in request:", req.cookies);
-    const token = req.cookies.token;
-    console.log("token from cookies", token);
-    res.status(HttpStatusCode.Ok).json(await UserManager.verifyToken(token));
+    const authorizationHeader = req.headers["authorization"] || "";
+    const token = authorizationHeader.startsWith("Bearer ")
+      ? authorizationHeader.split(" ")[1]
+      : "";
+    const isTokenValid = await UserManager.verifyToken(token);
+    console.log("token:::", token);
+    console.log("isValidToken", isTokenValid);
+
+    if (isTokenValid) {
+      res.status(HttpStatusCode.Ok).json({ message: "Token is valid" });
+    } else {
+      res
+        .status(HttpStatusCode.Unauthorized)
+        .json({ message: "Invalid token" });
+    }
   },
 };

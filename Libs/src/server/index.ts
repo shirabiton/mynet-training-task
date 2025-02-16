@@ -3,16 +3,19 @@ import cors from "cors";
 import dotenv from "dotenv";
 import express, { Router } from "express";
 
-export const initApp = (AppRouter: Router, port: number) => {
+export const initApp = (
+  port: number,
+  app: express.Application,
+  AppRouter: Router
+) => {
   dotenv.config();
-  const app = express();
 
   app.use(express.json());
 
   app.use(
     cors({
       origin: "http://localhost:5173",
-      methods: ["GET", "POST", "PUT", "DELETE"], // change
+      methods: ["GET", "POST", "PUT", "DELETE"],
       credentials: true,
       allowedHeaders: ["Content-Type", "Authorization"],
     })

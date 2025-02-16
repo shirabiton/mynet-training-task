@@ -1,36 +1,33 @@
-import axios from 'axios';
-import config from '../config';
-import { Item } from './../../../Libs/src/types/DB/item.type';
+import axios from "axios";
+import config from "../config";
+import { Item } from "./../../../Libs/src/types/DB/item.type";
 
 const { api } = config.endpoints.item;
 
 const ItemService = {
-    getItems: async (): Promise<Item[]> => {
-        console.log("api url:", api);
-        // const res = await axios.get(`${api}`, { withCredentials: true });
-        // console.log("on get items in frontend service, res:", res);
-        const token = localStorage.getItem("token");  // או מ-cookie
+  getItems: async (): Promise<Item[]> => {
+    const token = localStorage.getItem("token");
 
-        const res = await axios.get(`${api}`, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            },
-            withCredentials: true  // אם אתה משתמש בקוקיז
-        });
+    const res = await axios.get(`${api}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      withCredentials: true,
+    });
 
-        return res.data;
-    },
-    getItemById: async (id: string): Promise<Item> => {
-        const token = localStorage.getItem("token");  // או מ-cookie
+    return res.data;
+  },
+  getItemById: async (id: string): Promise<Item> => {
+    const token = localStorage.getItem("token");
 
-        const res = await axios.get(`${api}/${id}`, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            },
-            withCredentials: true  // אם אתה משתמש בקוקיז
-        });
+    const res = await axios.get(`${api}/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      withCredentials: true,
+    });
 
-        return res.data;
-    }
-}
+    return res.data;
+  },
+};
 export default ItemService;

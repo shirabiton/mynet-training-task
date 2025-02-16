@@ -4,20 +4,20 @@ import translationHE from "./assets/i18n/he.json";
 import translationEN from "./assets/i18n/en.json";
 
 const resources = {
-	he: {
-		translation: translationHE,
-	},
-	en: {
-		translation: translationEN,
-	}
+  he: {
+    translation: translationHE,
+  },
+  en: {
+    translation: translationEN,
+  },
 };
 
 i18n.use(initReactI18next).init({
-	resources,
-	lng: "he", // default language
-	interpolation: {
-		escapeValue: false,
-	},
+  resources,
+  lng: "he", // default language
+  interpolation: {
+    escapeValue: false,
+  },
 });
 
 export default i18n;
