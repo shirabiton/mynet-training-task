@@ -1,5 +1,5 @@
 {
-  "name": "userservice",
+  "name": "gateway",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -7,16 +7,20 @@
     "start": "ts-node src/index.ts"
   },
   "author": "",
+  "keywords": [],
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "axios": "^1.7.9",
     "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
     "express": "^4.21.2",
-    "jsonwebtoken": "^9.0.2"
+    "http-proxy-middleware": "^3.0.3"
   },
   "devDependencies": {
     "@types/cookie-parser": "^1.4.8",
-    "@types/jsonwebtoken": "^9.0.8"
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.13.4",
+    "ts-node": "^10.9.2"
   }
 }

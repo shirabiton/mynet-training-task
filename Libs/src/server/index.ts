@@ -14,6 +14,7 @@ export const initApp = (AppRouter: Router, port: number) => {
       origin: "http://localhost:5173",
       methods: ["GET", "POST", "PUT", "DELETE"], // change
       credentials: true,
+      allowedHeaders: ["Content-Type", "Authorization"],
     })
   );
 

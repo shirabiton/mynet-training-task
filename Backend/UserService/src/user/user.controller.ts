@@ -38,14 +38,15 @@ export const UserController = {
       return;
     }
 
-    const token = sign({ userId }, secretKey, { expiresIn: "1h" });
+    const token = sign({ userId }, secretKey);
+    // const token = sign({ userId }, secretKey, { expiresIn: "1h" });
     console.log("before cookies");
 
     res.cookie("token", token, {
       httpOnly: true,
       sameSite: "none",
-      secure: false,
-      domain: "localhost",
+      secure: true,
+      // domain: "localhost",
     });
 
     console.log("created token", token);

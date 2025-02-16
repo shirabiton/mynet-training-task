@@ -18,7 +18,7 @@ export const UserManager = {
   verifyToken: async (token: string): Promise<boolean | null> => {
     if (!token) {
       console.log("No token provided.");
-      return null;
+      return false;
     }
     return await UserRepository.verifyToken(token);
   },
