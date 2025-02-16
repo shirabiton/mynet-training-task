@@ -21,24 +21,23 @@ export const UserController = {
   },
 
   signIn: async (req: Request, res: Response): Promise<void> => {
+    console.log("in user controller sign in");
+
     const email = req.body.email;
     const password = req.body.password.trim().toLowerCase();
     const userByEmail: User | null = await UserManager.getUserByEmail(email);
 
     if (!userByEmail) {
-      res
-        .status(HttpStatusCode.BadRequest)
-        .json({ error: "Email does not exist" });
-      return;
+      throw new Error("Email does not exist");
     }
 
     if (userByEmail.password !== password) {
-      res
-        .status(HttpStatusCode.Unauthorized)
-        .json({ error: "Invalid email or password" });
-      return;
+      throw new Error("Invalid email or password");
     } else {
       const token = await UserManager.generateToken(userByEmail._id);
+
+      console.log("token created", token);
+
 
       res.cookie("token", token, {
         httpOnly: true,

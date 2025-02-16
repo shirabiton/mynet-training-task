@@ -13,6 +13,7 @@ export const verifyToken = async (
       res
         .status(HttpStatusCode.Unauthorized)
         .json({ message: "Token is missing" });
+      return;
     }
 
     const response = await axios.get("http://localhost:3002/verify", {
@@ -26,6 +27,7 @@ export const verifyToken = async (
       res
         .status(HttpStatusCode.Unauthorized)
         .json({ message: "Token verification failed" });
+      return;
     }
     next();
   } catch (error) {

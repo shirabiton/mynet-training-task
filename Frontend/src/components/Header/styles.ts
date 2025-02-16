@@ -7,8 +7,9 @@ const useStyles = createUseStyles({
       color: "white",
       minHeight: "8vh",
       margin: "0 0 1vw 0",
-      '& p':{
-        fontSize:'1rem'
+      '& p': {
+        fontSize: '1rem',
+        textAlign: 'center'
       }
     },
   },
@@ -21,7 +22,7 @@ const useStyles = createUseStyles({
   },
   logo: {
     margin: 0,
-    padding: "2rem",
+    padding: "2rem 0",
     cursor: "pointer",
     fontWeight: "500",
     fontSize: "1.3rem",

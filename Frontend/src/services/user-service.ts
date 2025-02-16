@@ -2,7 +2,7 @@ import axios from "axios";
 import config from "../config";
 import { User } from "./../../../Libs/src/types/DB/user.types";
 
-const { api } = config.endpoints.item;
+const { api } = config.endpoints.user;
 
 const UserService = {
   getUsers: async (): Promise<User[]> => {
@@ -14,6 +14,8 @@ const UserService = {
     return res.data;
   },
   signIn: async (email: string, password: string): Promise<void> => {
+    console.log("in front sign in", email, password);
+
     const res = await axios.post(
       `${api}/signin`,
       { email, password },

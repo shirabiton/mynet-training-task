@@ -4,10 +4,11 @@ import { UserController } from "./user.controller";
 
 const UserRouter: Router = Router();
 
-UserRouter.get("/verify", wrap(UserController.verifyToken)),
-  UserRouter.post("/signin", wrap(UserController.signIn)),
-  UserRouter.get("", wrap(UserController.getAll)),
-  UserRouter.get("/:userId", wrap(UserController.getUserById)),
-  UserRouter.get("/email/:userEmail", wrap(UserController.getUserByEmail));
+UserRouter.get("/verify", wrap(UserController.verifyToken));
+UserRouter.get("", wrap(UserController.getAll));
+UserRouter.get("/:userId", wrap(UserController.getUserById));
+UserRouter.get("/email/:userEmail", wrap(UserController.getUserByEmail));
+
+UserRouter.post("/signin", wrap(UserController.signIn));
 
 export default UserRouter;
