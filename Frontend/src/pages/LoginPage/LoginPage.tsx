@@ -1,17 +1,22 @@
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 import { handleSubmit } from "./functions";
 import useStyles from "./styles";
 
 const LoginPage: FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
   const classes = useStyles();
   const { t } = useTranslation("translation", { keyPrefix: "LOGIN" });
 
   return (
     <div className={classes.formContainer}>
-      <form onSubmit={(e) => handleSubmit(e, email, password)} className={classes.formContent}>
+      <form
+        onSubmit={(e) => handleSubmit(e, email, password, navigate)}
+        className={classes.formContent}
+      >
         <h1>{t("TITLE")}</h1>
         <input
           type="text"
@@ -27,7 +32,9 @@ const LoginPage: FC = () => {
           autoComplete="current-password"
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="submit">{t("LOGIN_BUTTON")}</button>
+        <button type="submit" className={classes.loginButton}>
+          {t("LOGIN_BUTTON")}
+        </button>
       </form>
     </div>
   );

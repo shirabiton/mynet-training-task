@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { useNavigate } from "react-router-dom";
 import ErrorPage from "../../pages/ErrorPage/ErrorPage";
-import { navigateToHome } from "../globalFunctions";
+import { ROUTES_NAMES } from "../globalConsts";
 
 const ErrorHandler: React.FC<{ children: ReactNode }> = ({ children }) => {
   const navigate = useNavigate();
@@ -26,7 +26,7 @@ const ErrorHandler: React.FC<{ children: ReactNode }> = ({ children }) => {
   return (
     <ErrorBoundary
       FallbackComponent={ErrorFallback}
-      onReset={() => navigateToHome(navigate)}
+      onReset={() => navigate(ROUTES_NAMES.ITEM_LIST)}
     >
       {children}
     </ErrorBoundary>

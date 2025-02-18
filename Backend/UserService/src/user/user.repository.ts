@@ -1,10 +1,8 @@
 import { User } from "@Libs/types/DB/user.types";
 import fs from "fs";
-import jsonwebtoken from "jsonwebtoken";
 
 export const UserRepository = {
   getAll: async (): Promise<User[]> => {
-    console.log("in get all");
     const data = fs.readFileSync("./src/mocks/users.json", "utf8");
     const parsedData = JSON.parse(data);
     return parsedData.data;

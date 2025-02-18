@@ -2,6 +2,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import dotenv from "dotenv";
 import express, { Router } from "express";
+import { errorCatcherMiddleware } from "../utils/errors/middlewares";
 
 export const initApp = (
   port: number,
@@ -22,6 +23,8 @@ export const initApp = (
   );
 
   app.use(cookieParser());
+
+  app.use(errorCatcherMiddleware);
 
   app.use(AppRouter);
 

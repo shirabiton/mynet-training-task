@@ -41,7 +41,7 @@ const ItemCard: FC<{ item: Item }> = ({ item }) => {
         </span>
         <span>
           <span className={classes.imgContainer} ref={elementRef}>
-            <ItemImage image={item.content} title={item.title}></ItemImage>
+            <ItemImage image={item.content} title={item.title} />
           </span>
         </span>
       </span>

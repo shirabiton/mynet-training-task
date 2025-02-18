@@ -1,6 +1,7 @@
 import { User } from "@Libs/types/DB/user.types";
-import { UserRepository } from "./user.repository";
+import { HttpStatusCode } from "axios";
 import jsonwebtoken from "jsonwebtoken";
+import { UserRepository } from "./user.repository";
 
 export const UserManager = {
   getAll: async (): Promise<User[]> => {
@@ -16,33 +17,74 @@ export const UserManager = {
     return await UserRepository.getUserByEmail(finalEmail);
   },
 
-  generateToken: async (userId: string): Promise<string> => {
-    const { sign } = jsonwebtoken;
-    const secretKey = process.env.JWT_SECRET_KEY;
-    if (!secretKey) {
-      throw new Error("JWT secret key is not defined");
+  generateToken: async (
+    email: string,
+    password: string
+  ): Promise<{ token: string; user: User | null }> => {
+    const userByEmail: User | null = await UserManager.getUserByEmail(email);
+
+    if (!userByEmail) {
+      throw {
+        message: "Email does not exist",
+        code: HttpStatusCode.Unauthorized,
+      };
     }
+
+    const finalPassword = password.trim().toLowerCase();
+
+    if (userByEmail.password !== finalPassword) {
+      throw {
+        message: "Invalid email or password",
+        code: HttpStatusCode.Unauthorized,
+      };
+    }
+
+    const secretKey = process.env.JWT_SECRET_KEY;
+
+    if (!secretKey) {
+      throw {
+        message: "JWT secret key is not defined",
+        code: HttpStatusCode.Unauthorized,
+      };
+    }
+
+    const { sign } = jsonwebtoken;
+
     // sign({ userId }, secretKey, { expiresIn: "1h" });
-    return sign({ userId }, secretKey);
+    return {
+      token: sign({ userId: userByEmail._id }, secretKey),
+      user: userByEmail,
+    };
   },
 
-  verifyToken: async (token: string): Promise<boolean> => {
+  verifyToken: async (
+    token: string | undefined
+  ): Promise<{ isValid: boolean }> => {
     const { verify } = jsonwebtoken;
 
     if (!token) {
-      console.log("No token provided.");
-      return false;
+      throw {
+        message: "No token provided.",
+        code: HttpStatusCode.Unauthorized,
+      };
     }
+
     const secretKey = process.env.JWT_SECRET_KEY;
     if (!secretKey) {
-      console.error("JWT secret key is missing in environment variables");
-      return false;
+      throw {
+        message: "JWT secret key is missing in environment variables",
+        code: HttpStatusCode.Unauthorized,
+      };
     }
+
     const decoded = verify(token, secretKey) as { userId: string };
     if (!decoded || !decoded.userId) {
-      console.log("Invalid token");
-      return false;
+      throw {
+        message: "Invalid token",
+        code: HttpStatusCode.Unauthorized,
+      };
     }
-    return true;
+
+    return { isValid: true };
   },
 };

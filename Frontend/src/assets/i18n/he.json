@@ -1,9 +1,10 @@
 {
     "HEADER": {
-        "TITLE": "אתר קניות",
+        "LOGO_TEXT": "אתר קניות",
         "LABEL": "לדף הבית",
         "WELCOME_MESSAGE": "היי, ",
-        "GUEST_NAME": "אורח"
+        "GUEST_NAME": "אורח",
+        "PROFILE_TITLE":"התחבר / התנתק"
     },
     "FOOTER": {
         "COPYRIGHT": "© כל הזכויות שמורות | 2025"

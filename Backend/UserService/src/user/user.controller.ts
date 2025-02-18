@@ -1,4 +1,3 @@
-import { User } from "@Libs/types/DB/user.types";
 import { HttpStatusCode } from "axios";
 import { Request, Response } from "express";
 import { UserManager } from "./user.manager";
@@ -21,54 +20,43 @@ export const UserController = {
   },
 
   signIn: async (req: Request, res: Response): Promise<void> => {
-    console.log("in user controller sign in");
+    const { token, user } = await UserManager.generateToken(
+      req.body.email,
+      req.body.password
+    );
 
-    const email = req.body.email;
-    const password = req.body.password.trim().toLowerCase();
-    const userByEmail: User | null = await UserManager.getUserByEmail(email);
+    res.cookie("token", token, {
+      sameSite: "none",
+      secure: true,
+    });
 
-    if (!userByEmail) {
-      throw new Error("Email does not exist");
-    }
-
-    if (userByEmail.password !== password) {
-      throw new Error("Invalid email or password");
-    } else {
-      const token = await UserManager.generateToken(userByEmail._id);
-
-      console.log("token created", token);
-
-
-      res.cookie("token", token, {
-        httpOnly: true,
+    user &&
+      res.cookie("current-user-name", user.fullName, {
         sameSite: "none",
         secure: true,
       });
 
-      res.cookie("current-user-name", userByEmail.fullName, {
-        sameSite: "none",
-        secure: true,
-      });
+    res.status(HttpStatusCode.Ok).json({ user: user });
+  },
 
-      res.status(HttpStatusCode.Ok).json({ user: userByEmail });
-    }
+  logOut: async (req: Request, res: Response): Promise<void> => {
+    res.clearCookie("token");
+
+    res.clearCookie("current-user-name");
+    res
+      .status(HttpStatusCode.Ok)
+      .json({ message: "User logged out successfully" });
   },
 
   verifyToken: async (req: Request, res: Response): Promise<void> => {
-    const authorizationHeader = req.headers["authorization"] || "";
-    const token = authorizationHeader.startsWith("Bearer ")
-      ? authorizationHeader.split(" ")[1]
-      : "";
-    const isTokenValid = await UserManager.verifyToken(token);
-    console.log("token:::", token);
-    console.log("isValidToken", isTokenValid);
+    const token = req.headers["authorization"]?.split(" ")[1];
 
-    if (isTokenValid) {
-      res.status(HttpStatusCode.Ok).json({ message: "Token is valid" });
-    } else {
-      res
-        .status(HttpStatusCode.Unauthorized)
-        .json({ message: "Invalid token" });
-    }
+    const { isValid } = await UserManager.verifyToken(token);
+
+    isValid
+      ? res.status(HttpStatusCode.Ok).json({ message: "Token is valid" })
+      : res
+          .status(HttpStatusCode.Unauthorized)
+          .json({ message: "Invalid token" });
   },
 };

@@ -1,36 +1,27 @@
 import axios, { HttpStatusCode } from "axios";
 import { NextFunction, Request, Response } from "express";
+import config from "../../config";
 
 export const verifyToken = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  const token = req.cookies.token || "";
+  const token = req.cookies.token;
+  const { api } = config.endpoints.user;
 
-  try {
-    if (!token) {
-      res
-        .status(HttpStatusCode.Unauthorized)
-        .json({ message: "Token is missing" });
-      return;
-    }
+  const response = await axios.get(`${api}/verify`, {
+    withCredentials: true,
+    headers: { Authorization: `Bearer ${token}` },
+  });
 
-    const response = await axios.get("http://localhost:3002/verify", {
-      withCredentials: true,
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+  const isValid = response.data;
 
-    if (!response) {
-      res
-        .status(HttpStatusCode.Unauthorized)
-        .json({ message: "Token verification failed" });
-      return;
-    }
-    next();
-  } catch (error) {
-    console.log("hi", error);
+  if (!isValid) {
+    throw {
+      message: "Token verification failed",
+      code: HttpStatusCode.Unauthorized,
+    };
   }
+  next();
 };

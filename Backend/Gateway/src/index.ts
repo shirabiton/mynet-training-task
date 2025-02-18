@@ -1,5 +1,5 @@
 import express from "express";
-import { createProxyMiddleware } from "http-proxy-middleware";
+import { createProxyMiddleware, fixRequestBody } from "http-proxy-middleware";
 import { initApp } from "./../../../Libs/src/server/index";
 import GatewayRouter from "./gateway/gateway.router";
 
@@ -17,6 +17,9 @@ const setupProxy = () => {
       cookieDomainRewrite: "",
       pathRewrite: {
         "^/user-service": "",
+      },
+      on: {
+        proxyReq: fixRequestBody,
       },
     })
   );

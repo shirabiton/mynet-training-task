@@ -6,7 +6,7 @@ const config = {
       }`,
     },
     user: {
-      api: `${import.meta.env.VITE_USER_BASE_URL}/${
+      api: `${import.meta.env.VITE_BASE_URL}/${
         import.meta.env.VITE_USER_SERVICE
       }`,
     },

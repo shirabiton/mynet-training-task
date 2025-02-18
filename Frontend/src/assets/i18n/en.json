@@ -1,9 +1,10 @@
 {
     "HEADER": {
-        "TITLE": "Shopping",
+        "LOGO_TEXT": "Shopping",
         "LABEL": "Go to Home",
         "WELCOME_MESSAGE": "Hi, ",
-        "GUEST_NAME": "Guest"
+        "GUEST_NAME": "Guest",
+        "PROFILE_TITLE":"Log in / Log out"
     },
     "FOOTER": {
         "COPYRIGHT": "All rights reserved | 2025 ©"
