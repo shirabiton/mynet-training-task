@@ -24,7 +24,7 @@ const UserService = {
   ): Promise<void> => {
     const res = await axios.post(
       `${api}/signin`,
-      { email: email, password: password },
+      { email, password },
       { withCredentials: true }
     );
     navigate(`/${ROUTES_NAMES.ITEM_LIST}`);
