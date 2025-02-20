@@ -1,7 +1,7 @@
 import { Router } from "express";
 import GatewayRouter from "./gateway/gateway.router";
 
-const AppRouter: Router = Router();
+const AppRouter = Router();
 
 AppRouter.use("", GatewayRouter);
 

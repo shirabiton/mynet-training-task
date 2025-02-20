@@ -1,7 +1,7 @@
 import { Router } from "express";
 import ItemRouter from "./item/item.router";
 
-const AppRouter: Router = Router();
+const AppRouter = Router();
 
 AppRouter.use("", ItemRouter);
 

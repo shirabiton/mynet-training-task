@@ -5,9 +5,9 @@ import express, { Router } from "express";
 import { errorCatcherMiddleware } from "../utils/errors/middlewares";
 
 export const initApp = (
-  port: number,
   app: express.Application,
-  AppRouter: Router
+  AppRouter: Router,
+  port: number
 ) => {
   dotenv.config();
 

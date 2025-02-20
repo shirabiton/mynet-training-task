@@ -6,7 +6,7 @@ import GatewayRouter from "./gateway/gateway.router";
 const port = 3000;
 const app = express();
 
-initApp(port, app, GatewayRouter);
+initApp(app, GatewayRouter, port);
 
 const setupProxy = () => {
   app.use(

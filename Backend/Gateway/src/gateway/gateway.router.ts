@@ -1,5 +1,5 @@
 import { Router } from "express";
 
-const GatewayRouter: Router = Router();
+const GatewayRouter = Router();
 
 export default GatewayRouter;
