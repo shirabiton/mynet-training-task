@@ -4,16 +4,14 @@ import jsonwebtoken from "jsonwebtoken";
 import { UserRepository } from "./user.repository";
 
 export const UserManager = {
-  getAll: async (): Promise<User[]> => {
-    return await UserRepository.getAll();
-  },
+  getAll: async (): Promise<User[]> => await UserRepository.getAll(),
 
-  getUserById: async (id: string): Promise<User | null> => {
-    return await UserRepository.getUserById(id);
-  },
+  getUserById: async (id: string): Promise<User | null> =>
+    await UserRepository.getUserById(id),
 
   getUserByEmail: async (email: string): Promise<User | null> => {
     const finalEmail = decodeURIComponent(email).trim().toLowerCase();
+    
     return await UserRepository.getUserByEmail(finalEmail);
   },
 
@@ -50,9 +48,8 @@ export const UserManager = {
 
     const { sign } = jsonwebtoken;
 
-    // sign({ userId }, secretKey, { expiresIn: "1h" });
     return {
-      token: sign({ userId: userByEmail._id }, secretKey),
+      token: sign({ userId: userByEmail._id }, secretKey, { expiresIn: "1h" }),
       user: userByEmail,
     };
   },

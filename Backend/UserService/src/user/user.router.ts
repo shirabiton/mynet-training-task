@@ -1,14 +1,17 @@
 import { Router } from "express";
-import { wrap } from "./../../../../Libs/src/utils/helper/wrapper";
+import { wrapController } from "./../../../../Libs/src/utils/helper/wrapper";
 import { UserController } from "./user.controller";
 
-const UserRouter: Router = Router();
+const UserRouter = Router();
 
-UserRouter.post("/signin", wrap(UserController.signIn));
-UserRouter.get("/logout", wrap(UserController.logOut));
-UserRouter.get("/verify", wrap(UserController.verifyToken));
-UserRouter.get("", wrap(UserController.getAll));
-UserRouter.get("/:userId", wrap(UserController.getUserById));
-UserRouter.get("/email/:userEmail", wrap(UserController.getUserByEmail));
+UserRouter.post("/signin", wrapController(UserController.signIn));
+UserRouter.get("/logout", wrapController(UserController.logOut));
+UserRouter.get("/verify", wrapController(UserController.verifyToken));
+UserRouter.get("", wrapController(UserController.getAll));
+UserRouter.get("/:userId", wrapController(UserController.getUserById));
+UserRouter.get(
+  "/email/:userEmail",
+  wrapController(UserController.getUserByEmail)
+);
 
 export default UserRouter;
