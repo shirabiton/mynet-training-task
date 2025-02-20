@@ -4,14 +4,22 @@ import jsonwebtoken from "jsonwebtoken";
 import { UserRepository } from "./user.repository";
 
 export const UserManager = {
-  getAll: async (): Promise<User[]> => await UserRepository.getAll(),
+  getAll: UserRepository.getAll,
 
-  getUserById: async (id: string): Promise<User | null> =>
-    await UserRepository.getUserById(id),
+  getUserById: async (id: string): Promise<User> => {
+    const user = await UserRepository.getUserById(id);
+    if (!user) {
+      throw {
+        message: "User does not exist",
+        code: HttpStatusCode.NotFound,
+      };
+    }
+    return user;
+  },
 
   getUserByEmail: async (email: string): Promise<User | null> => {
     const finalEmail = decodeURIComponent(email).trim().toLowerCase();
-    
+
     return await UserRepository.getUserByEmail(finalEmail);
   },
 
