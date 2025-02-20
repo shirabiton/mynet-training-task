@@ -4,11 +4,9 @@ import dotenv from "dotenv";
 import express, { Router } from "express";
 import { errorCatcherMiddleware } from "../utils/errors/middlewares";
 
-export const initApp = (
-  app: express.Application,
-  AppRouter: Router,
-  port: number
-) => {
+export const initApp = (AppRouter: Router, port: number) => {
+  const app = express();
+  
   dotenv.config();
 
   app.use(express.json());
