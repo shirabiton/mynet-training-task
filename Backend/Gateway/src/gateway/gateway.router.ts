@@ -1,9 +1,9 @@
 import { Router } from "express";
 import { createProxyMiddleware, fixRequestBody } from "http-proxy-middleware";
 
-const router = Router();
+const GatewayRouter = Router();
 
-router.use(
+GatewayRouter.use(
   "/user-service",
   createProxyMiddleware({
     target: "http://localhost:3002",
@@ -18,7 +18,7 @@ router.use(
   })
 );
 
-router.use(
+GatewayRouter.use(
   "/item-service",
   createProxyMiddleware({
     target: "http://localhost:3001",
@@ -30,4 +30,4 @@ router.use(
   })
 );
 
-export default router;
+export default GatewayRouter;
