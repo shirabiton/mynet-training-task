@@ -1,11 +1,11 @@
 import ItemService from "../../services/item-service";
 
 export const fetchItems = async () => {
-  const data = sessionStorage.getItem("items");
-
-  return data
-    ? JSON.parse(data)
-    : await ItemService.getItems().then((req) =>
-        sessionStorage.setItem("items", JSON.stringify(req))
-      );
+  return (
+    JSON.parse(sessionStorage.getItem("items") ?? "null") ??
+    (await ItemService.getItems().then((items) => {
+      sessionStorage.setItem("items", JSON.stringify(items));
+      return items;
+    }))
+  );
 };

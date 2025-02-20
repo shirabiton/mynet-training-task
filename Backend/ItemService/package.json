@@ -1,23 +1,13 @@
 {
-  "name": "itemservice",
-  "version": "1.0.0",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "ts-node src/index.ts"
   },
-  "author": "",
-  "license": "ISC",
-  "keywords": [],
-  "description": "",
   "dependencies": {
-    "@types/node": "^22.13.4",
     "axios": "^1.7.9",
-    "dotenv": "^16.4.7",
-    "express": "^4.21.2",
-    "fs": "^0.0.1-security"
+    "express": "^4.21.2"
   },
   "devDependencies": {
-    "@types/express": "^5.0.0"
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.13.4"
   }
 }
