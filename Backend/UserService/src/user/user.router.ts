@@ -5,10 +5,15 @@ import { UserController } from "./user.controller";
 const UserRouter = Router();
 
 UserRouter.post("/signin", wrapController(UserController.signIn));
+
 UserRouter.get("/logout", wrapController(UserController.logOut));
+
 UserRouter.get("/verify", wrapController(UserController.verifyToken));
+
 UserRouter.get("", wrapController(UserController.getAll));
+
 UserRouter.get("/:userId", wrapController(UserController.getUserById));
+
 UserRouter.get(
   "/email/:userEmail",
   wrapController(UserController.getUserByEmail)

@@ -6,6 +6,7 @@ import { ItemController } from "./item.controller";
 const ItemRouter = Router();
 
 ItemRouter.get("", verifyToken, wrapController(ItemController.getAll));
+
 ItemRouter.get(
   "/:itemId",
   verifyToken,
