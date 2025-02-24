@@ -14,9 +14,4 @@ UserRouter.get("", wrapController(UserController.getAll));
 
 UserRouter.get("/:userId", wrapController(UserController.getUserById));
 
-UserRouter.get(
-  "/email/:userEmail",
-  wrapController(UserController.getUserByEmail)
-);
-
 export default UserRouter;
