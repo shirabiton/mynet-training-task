@@ -13,12 +13,6 @@ export const UserController = {
       .json(await UserManager.getUserById(req.params.userId));
   },
 
-  getUserByEmail: async (req: Request, res: Response): Promise<void> => {
-    res
-      .status(HttpStatusCode.Ok)
-      .json(await UserManager.getUserByEmail(req.params.userEmail));
-  },
-
   logIn: async (req: Request, res: Response): Promise<void> => {
     const { token, user } = await UserManager.generateToken(
       req.body.email,
