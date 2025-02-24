@@ -11,6 +11,7 @@ export const UserManager = {
 
   getUserById: async (id: string): Promise<User> => {
     const user = await UserRepository.getUserById(id);
+    
     return user ?? throwNotFoundError("User does not exist");
   },
 

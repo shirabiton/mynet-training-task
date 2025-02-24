@@ -17,6 +17,7 @@ const ItemImage: FC<{ image: LQIPMedia; title: string }> = ({
       setBaseUrl(image.highQuality);
       setIsLoaded(true);
     };
+    
     return () => {
       img.onload = null;
     };

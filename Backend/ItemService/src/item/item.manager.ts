@@ -7,6 +7,7 @@ export const ItemManager = {
 
   getItemById: async (id: string): Promise<Item> => {
     const item = await ItemRepository.getItemById(id);
+    
     return item ?? throwNotFoundError("Item does not exist");
   },
 };

@@ -8,10 +8,12 @@ const { api } = config.endpoints.user;
 const UserService = {
   getUsers: async (): Promise<User[]> => {
     const res = await axios.get(`${api}`);
+
     return res.data;
   },
   getUserById: async (id: string): Promise<User> => {
     const res = await axios.get(`${api}/:${id}`);
+
     return res.data;
   },
   signIn: async (
@@ -28,18 +30,21 @@ const UserService = {
       { withCredentials: true }
     );
     navigate(`/${ROUTES_NAMES.ITEM_LIST}`);
+
     return res.data;
   },
   logOut: async (): Promise<void> => {
     const res = await axios.get(`${api}/logout`, {
       withCredentials: true,
     });
+    
     return res.data;
   },
   verifyToken: async (): Promise<void> => {
     const res = await axios.get(`${api}/verify`, {
       withCredentials: true,
     });
+    
     return res.data;
   },
 };

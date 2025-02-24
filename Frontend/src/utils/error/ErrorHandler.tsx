@@ -14,6 +14,7 @@ const ErrorHandler: React.FC<{ children: ReactNode }> = ({ children }) => {
     error: Error;
     resetErrorBoundary: () => void;
   }) => {
+    
     return (
       <ErrorPage
         fallback
