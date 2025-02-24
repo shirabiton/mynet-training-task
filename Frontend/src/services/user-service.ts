@@ -16,7 +16,7 @@ const UserService = {
 
     return res.data;
   },
-  signIn: async (
+  logIn: async (
     email: string,
     password: string,
     navigate: (
@@ -25,7 +25,7 @@ const UserService = {
     ) => void
   ): Promise<void> => {
     const res = await axios.post(
-      `${api}/signin`,
+      `${api}/login`,
       { email, password },
       { withCredentials: true }
     );

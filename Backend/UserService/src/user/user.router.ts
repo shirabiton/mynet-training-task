@@ -4,7 +4,7 @@ import { UserController } from "./user.controller";
 
 const UserRouter = Router();
 
-UserRouter.post("/signin", wrapController(UserController.signIn));
+UserRouter.post("/login", wrapController(UserController.logIn));
 
 UserRouter.get("/logout", wrapController(UserController.logOut));
 

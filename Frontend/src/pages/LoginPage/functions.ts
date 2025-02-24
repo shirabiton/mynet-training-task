@@ -11,5 +11,5 @@ export const handleSubmit = async (
 ) => {
   e.preventDefault();
   
-  return await UserService.signIn(email, password, navigate);
+  return await UserService.logIn(email, password, navigate);
 };

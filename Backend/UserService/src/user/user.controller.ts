@@ -19,7 +19,7 @@ export const UserController = {
       .json(await UserManager.getUserByEmail(req.params.userEmail));
   },
 
-  signIn: async (req: Request, res: Response): Promise<void> => {
+  logIn: async (req: Request, res: Response): Promise<void> => {
     const { token, user } = await UserManager.generateToken(
       req.body.email,
       req.body.password
