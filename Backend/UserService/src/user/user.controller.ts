@@ -1,5 +1,6 @@
 import { HttpStatusCode } from "axios";
 import { Request, Response } from "express";
+import { COOKIES } from "./../../../../Libs/src/server/global-consts";
 import { UserManager } from "./user.manager";
 
 export const UserController = {
@@ -19,24 +20,24 @@ export const UserController = {
       req.body.password
     );
 
-    res.cookie("token", token, {
+    res.cookie(COOKIES.TOKEN, token, {
       sameSite: "none",
       secure: true,
     });
 
     user &&
-      res.cookie("current-user-name", user.fullName, {
+      res.cookie(COOKIES.CURRENT_USER_NAME, user.fullName, {
         sameSite: "none",
         secure: true,
       });
 
-    res.status(HttpStatusCode.Ok).json({ user: user });
+    res.status(HttpStatusCode.Ok).json({ user });
   },
 
   logOut: async (req: Request, res: Response): Promise<void> => {
-    res.clearCookie("token");
+    res.clearCookie(COOKIES.TOKEN);
 
-    res.clearCookie("current-user-name");
+    res.clearCookie(COOKIES.CURRENT_USER_NAME);
     res
       .status(HttpStatusCode.Ok)
       .json({ message: "User logged out successfully" });

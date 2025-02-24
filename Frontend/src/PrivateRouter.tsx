@@ -4,12 +4,13 @@ import { useLocation, useNavigate } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import { ROUTES_NAMES } from "./utils/globalConsts";
 import { PrivateRouteProps } from "./utils/globalTypes";
+import { COOKIES } from "../../Libs/src/server/global-consts";
 
 const PrivateRouter: React.FC<PrivateRouteProps> = ({
   component: Component,
 }) => {
-  const [cookies] = useCookies(["token"]);
-  const token = cookies["token"];
+  const [cookies] = useCookies([COOKIES.TOKEN]);
+  const token = cookies[COOKIES.TOKEN];
 
   const navigate = useNavigate();
   const location = useLocation();

@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
+import { COOKIES } from "./../../../../Libs/src/server/global-consts";
 import UserService from "../../services/user-service";
 import { ROUTES_NAMES } from "../../utils/globalConsts";
 
@@ -9,8 +10,8 @@ export const toggleLogin = async (
     options?: { replace?: boolean; state?: unknown }
   ) => void
 ) => {
-  const token = cookies["token"];
-  const currentUserName = cookies["current-user-name"];
+  const token = cookies[COOKIES.TOKEN];
+  const currentUserName = cookies[COOKIES.CURRENT_USER_NAME];
 
   (token || (currentUserName && token !== "" && currentUserName !== "")) &&
     UserService.logOut();
