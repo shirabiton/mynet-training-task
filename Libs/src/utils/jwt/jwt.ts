@@ -1,6 +1,7 @@
-import axios, { HttpStatusCode } from "axios";
+import axios from "axios";
 import { NextFunction, Request, Response } from "express";
 import config from "../../config";
+import { throwUnauthorizedError } from "./../errors/errors-generator";
 
 export const verifyToken = async (
   req: Request,
@@ -15,13 +16,7 @@ export const verifyToken = async (
     headers: { Authorization: `Bearer ${token}` },
   });
 
-  const isValid = response.data;
+  !response.data && throwUnauthorizedError("Token verification failed");
 
-  if (!isValid) {
-    throw {
-      message: "Token verification failed",
-      code: HttpStatusCode.Unauthorized,
-    };
-  }
   next();
 };
