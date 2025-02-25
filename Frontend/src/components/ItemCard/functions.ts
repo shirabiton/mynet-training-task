@@ -1,3 +1,5 @@
+import { ROUTES_NAMES } from "../../utils/globalConsts";
+
 export const handleItemClick = (itemId: string, elementRef: HTMLDivElement | null,
     navigate: (to: string, options?: { replace?: boolean; state?: unknown }) => void, setLeftPosition: React.Dispatch<React.SetStateAction<number>>,
     setTopPosition: React.Dispatch<React.SetStateAction<number>>, setIsAnimated: React.Dispatch<React.SetStateAction<boolean>>) => {
@@ -13,7 +15,7 @@ export const handleItemClick = (itemId: string, elementRef: HTMLDivElement | nul
         behavior: 'smooth'
     })
     setTimeout(() => {
-        navigate(`/items/${itemId}`);
+        navigate(`/${ROUTES_NAMES.ITEM_LIST}/${itemId}`);
         setIsAnimated(false);
     }, 100);
 }

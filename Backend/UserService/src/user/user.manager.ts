@@ -32,7 +32,7 @@ export const UserManager = {
     email: string,
     password: string
   ): Promise<{ token: string; user: FetchedUser | null }> => {
-    const user = await UserManager.getUserByEmail(email);
+    const user: User | null = await UserManager.getUserByEmail(email);
 
     user ?? throwUnauthorizedError("Email does not exist");
 
