@@ -22,9 +22,9 @@ export const initApp = (AppRouter: Router, port: number) => {
 
   app.use(cookieParser());
 
-  app.use(errorCatcherMiddleware);
-
   app.use(AppRouter);
+
+  app.use(errorCatcherMiddleware);
 
   app.listen(port, () => {
     console.log(`Service is running on http://localhost:${port}`);

@@ -1,17 +1,17 @@
 import { Router } from "express";
-import { wrapController } from "../../../../Libs/src/utils/helper/wrapper";
+import { wrapAsyncMiddleware } from "../../../../Libs/src/utils/helper/wrapper";
 import { UserController } from "./user.controller";
 
 const UserRouter = Router();
 
-UserRouter.post("/login", wrapController(UserController.logIn));
+UserRouter.post("/login", wrapAsyncMiddleware(UserController.logIn));
 
-UserRouter.get("/logout", wrapController(UserController.logOut));
+UserRouter.get("/logout", wrapAsyncMiddleware(UserController.logOut));
 
-UserRouter.get("/verify", wrapController(UserController.verifyToken));
+UserRouter.get("/verify", wrapAsyncMiddleware(UserController.verifyToken));
 
-UserRouter.get("", wrapController(UserController.getAll));
+UserRouter.get("", wrapAsyncMiddleware(UserController.getAll));
 
-UserRouter.get("/:userId", wrapController(UserController.getUserById));
+UserRouter.get("/:userId", wrapAsyncMiddleware(UserController.getUserById));
 
 export default UserRouter;
