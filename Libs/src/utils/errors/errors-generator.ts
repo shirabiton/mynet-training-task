@@ -7,3 +7,7 @@ export const throwUnauthorizedError = (message: string) => {
 export const throwNotFoundError = (message: string) => {
   throw { message, code: HttpStatusCode.NotFound };
 };
+
+export const throwBadRequestError = (message: string) => {
+  throw { message, code: HttpStatusCode.BadRequest };
+};

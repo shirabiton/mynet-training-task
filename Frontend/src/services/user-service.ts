@@ -37,14 +37,7 @@ const UserService = {
     const res = await axios.get(`${api}/logout`, {
       withCredentials: true,
     });
-    
-    return res.data;
-  },
-  verifyToken: async (): Promise<void> => {
-    const res = await axios.get(`${api}/verify`, {
-      withCredentials: true,
-    });
-    
+
     return res.data;
   },
 };
