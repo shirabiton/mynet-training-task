@@ -1,27 +1,29 @@
-import { FetchedUser, User } from "@Libs/types/DB/user.types";
 import { sign, verify } from "jsonwebtoken";
-import { map, omit, toLower, trim } from "lodash/fp";
-import config from "../config";
+import { flow, map, toLower, trim } from "lodash/fp";
+import { FetchedUser, User } from "../../../../Libs/src/types/DB/user.types";
 import {
   throwBadRequestError,
   throwNotFoundError,
   throwUnauthorizedError,
-} from "./../../../../Libs/src/utils/errors/errors-generator";
+} from "../../../../Libs/src/utils/errors/errors-generator";
+import config from "../config";
+import { filterUserData } from "./../../../../Libs/src/server/functions";
 import { UserRepository } from "./user.repository";
 
 export const UserManager = {
-  getAll: async (): Promise<FetchedUser[]> => {
-    return map((user) => omit("password", user), await UserRepository.getAll());
-  },
+  getAll: async (): Promise<FetchedUser[]> =>
+    map((user) => filterUserData(user), await UserRepository.getAll()),
 
   getUserById: async (id: string): Promise<FetchedUser> => {
     const user = await UserRepository.getUserById(id);
 
-    return omit("password", user) ?? throwNotFoundError("User does not exist");
+    return user
+      ? filterUserData(user)
+      : throwNotFoundError("User does not exist");
   },
 
   getUserByEmail: async (email: string): Promise<User | null> => {
-    const formatted = toLower(trim(decodeURIComponent(email)));
+    const formatted = flow(decodeURIComponent, trim, toLower)(email);
 
     return await UserRepository.getUserByEmail(formatted);
   },
@@ -38,17 +40,17 @@ export const UserManager = {
       throwUnauthorizedError("Invalid email or password");
 
     return {
-      token: sign({ userId: user!._id }, config.SECRET_KEY!, {
+      token: sign({ userId: user!._id }, config.SECRET_KEY, {
         expiresIn: config.TOKEN_EXPIRATION_HOURS * 3600,
       }),
-      user: omit("password", user),
+      user: filterUserData(user!),
     };
   },
 
   verifyToken: async (token: string | undefined): Promise<void> => {
-    !token && throwBadRequestError("No token provided.");
+    token ?? throwBadRequestError("No token provided.");
 
-    verify(token!, config.SECRET_KEY!) ??
+    verify(token!, config.SECRET_KEY) ??
       throwUnauthorizedError("Invalid token");
   },
 };
