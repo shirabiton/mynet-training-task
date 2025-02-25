@@ -17,7 +17,7 @@ const PrivateRouter: React.FC<PrivateRouteProps> = ({
 
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-    !token &&
+    token ??
       navigate(`/${ROUTES_NAMES.LOGIN}`, {
         state: { from: location.pathname },
         replace: true,
