@@ -1,6 +1,9 @@
 import { User } from "@Libs/types/DB/user.types";
-import jsonwebtoken from "jsonwebtoken";
+import { sign, verify } from "jsonwebtoken";
+import { toLower, trim } from "lodash";
+import config from "../config";
 import {
+  throwBadRequestError,
   throwNotFoundError,
   throwUnauthorizedError,
 } from "./../../../../Libs/src/utils/errors/errors-generator";
@@ -11,12 +14,12 @@ export const UserManager = {
 
   getUserById: async (id: string): Promise<User> => {
     const user = await UserRepository.getUserById(id);
-    
+
     return user ?? throwNotFoundError("User does not exist");
   },
 
   getUserByEmail: async (email: string): Promise<User | null> => {
-    const finalEmail = decodeURIComponent(email).trim().toLowerCase();
+    const finalEmail = toLower(trim(decodeURIComponent(email)));
 
     return await UserRepository.getUserByEmail(finalEmail);
   },
@@ -25,45 +28,25 @@ export const UserManager = {
     email: string,
     password: string
   ): Promise<{ token: string; user: User | null }> => {
-    const userByEmail: User | null = await UserManager.getUserByEmail(email);
+    const user = await UserManager.getUserByEmail(email);
 
-    userByEmail ?? throwUnauthorizedError("Email does not exist");
+    user ?? throwUnauthorizedError("Email does not exist");
 
-    const finalPassword = password.trim().toLowerCase();
-
-    userByEmail!.password !== finalPassword &&
+    user!.password !== password &&
       throwUnauthorizedError("Invalid email or password");
 
-    const secretKey = process.env.JWT_SECRET_KEY;
-
-    !secretKey && throwUnauthorizedError("JWT secret key is not defined");
-
-    const { sign } = jsonwebtoken;
-
     return {
-      token: sign({ userId: userByEmail!._id }, secretKey!, {
-        expiresIn: "1h",
+      token: sign({ userId: user!._id }, config.SECRET_KEY!, {
+        expiresIn: config.TOKEN_EXPIRATION_HOURS * 3600,
       }),
-      user: userByEmail,
+      user: user,
     };
   },
 
-  verifyToken: async (
-    token: string | undefined
-  ): Promise<{ isValid: boolean }> => {
-    !token && throwUnauthorizedError("No token provided.");
+  verifyToken: async (token: string | undefined): Promise<void> => {
+    !token && throwBadRequestError("No token provided.");
 
-    const secretKey = process.env.JWT_SECRET_KEY;
-    !secretKey &&
-      throwUnauthorizedError(
-        "JWT secret key is missing in environment variables"
-      );
-
-    const { verify } = jsonwebtoken;
-
-    const decoded = verify(token!, secretKey!) as { userId: string };
-    (!decoded || !decoded.userId) && throwUnauthorizedError("Invalid token");
-
-    return { isValid: true };
+    (verify(token!, config.SECRET_KEY!) as { userId: string }) ??
+      throwUnauthorizedError("Invalid token");
   },
 };
