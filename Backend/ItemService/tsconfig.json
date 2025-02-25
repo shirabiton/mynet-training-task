@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "strict": true,
+    "resolveJsonModule": true,
+    "paths": {
+      "@Libs/*": ["../../Libs/src/*"]
+    }
+  }
+}

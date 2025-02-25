@@ -1,0 +1,32 @@
+{
+    "HEADER": {
+        "LOGO_TEXT": "אתר קניות",
+        "LABEL": "לדף הבית",
+        "WELCOME_MESSAGE": "היי, ",
+        "GUEST_NAME": "אורח",
+        "PROFILE_TITLE":"התחבר / התנתק"
+    },
+    "FOOTER": {
+        "COPYRIGHT": "© כל הזכויות שמורות | 2025"
+    },
+    "LOGIN": {
+        "TITLE": "התחברות",
+        "EMAIL_LABEL": "דוא\"ל",
+        "PASSWORD_LABEL": "סיסמה",
+        "LOGIN_BUTTON": "התחבר"
+    },
+    "LANGUAGE_SWITCHER": {
+        "OTHER_LANGUAGE": "English"
+    },
+    "ITEM_NOT_FOUND": {
+        "TEXT": "פריט לא קיים"
+    },
+    "NOT_FOUND": {
+        "TEXT": "אופס... הדף שחיפשת לא קיים :(",
+        "BUTTON_TEXT": "לדף הבית"
+    },
+    "QUERY_MESSAGES": {
+        "LOADING_MESSAGE": "טוען...",
+        "ERROR_MESSAGE": "התרחשה שגיאה"
+    }
+}
