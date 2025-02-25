@@ -45,7 +45,7 @@ export const UserController = {
   },
 
   verifyToken: async (req: Request, res: Response): Promise<void> => {
-    const token = replace(req.headers.authorization || "", "Bearer ", "");
+    const token = replace("Bearer ", "", req.headers.authorization || "");
 
     res.status(HttpStatusCode.Ok).json(await UserManager.verifyToken(token));
   },

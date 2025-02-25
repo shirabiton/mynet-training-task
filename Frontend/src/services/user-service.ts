@@ -1,17 +1,17 @@
 import axios from "axios";
 import config from "../config";
 import { ROUTES_NAMES } from "../utils/globalConsts";
-import { User } from "./../../../Libs/src/types/DB/user.types";
+import { FetchedUser } from "./../../../Libs/src/types/DB/user.types";
 
 const { api } = config.endpoints.user;
 
 const UserService = {
-  getUsers: async (): Promise<User[]> => {
+  getUsers: async (): Promise<FetchedUser[]> => {
     const res = await axios.get(`${api}`);
 
     return res.data;
   },
-  getUserById: async (id: string): Promise<User> => {
+  getUserById: async (id: string): Promise<FetchedUser> => {
     const res = await axios.get(`${api}/:${id}`);
 
     return res.data;

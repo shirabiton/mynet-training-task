@@ -1,7 +1,6 @@
 import { FetchedUser, User } from "@Libs/types/DB/user.types";
 import { sign, verify } from "jsonwebtoken";
-import { toLower, trim } from "lodash";
-import { omit } from "lodash/fp";
+import { map, omit, toLower, trim } from "lodash/fp";
 import config from "../config";
 import {
   throwBadRequestError,
@@ -11,7 +10,9 @@ import {
 import { UserRepository } from "./user.repository";
 
 export const UserManager = {
-  getAll: UserRepository.getAll,
+  getAll: async (): Promise<FetchedUser[]> => {
+    return map((user) => omit("password", user), await UserRepository.getAll());
+  },
 
   getUserById: async (id: string): Promise<FetchedUser> => {
     const user = await UserRepository.getUserById(id);
