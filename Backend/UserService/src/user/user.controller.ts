@@ -1,7 +1,7 @@
 import { HttpStatusCode } from "axios";
 import { Request, Response } from "express";
 import { replace } from "lodash/fp";
-import { COOKIES } from "./../../../../Libs/src/server/global-consts";
+import { COOKIES } from "../../../../Libs/src/server/global-consts";
 import { UserManager } from "./user.manager";
 
 export const UserController = {
@@ -46,7 +46,8 @@ export const UserController = {
 
   verifyToken: async (req: Request, res: Response): Promise<void> => {
     const token = replace("Bearer ", "", req.headers.authorization || "");
+    await UserManager.verifyToken(token);
 
-    res.status(HttpStatusCode.Ok).json(await UserManager.verifyToken(token));
+    res.status(HttpStatusCode.Ok).json("Token verified");
   },
 };

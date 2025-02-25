@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { wrapController } from "./../../../../Libs/src/utils/helper/wrapper";
+import { wrapController } from "../../../../Libs/src/utils/helper/wrapper";
 import { UserController } from "./user.controller";
 
 const UserRouter = Router();

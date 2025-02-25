@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { wrapController } from "./../../../../Libs/src/utils/helper/wrapper";
-import { verifyToken } from "./../../../../Libs/src/utils/jwt/jwt";
+import { wrapController } from "../../../../Libs/src/utils/helper/wrapper";
+import { verifyToken } from "../../../../Libs/src/utils/jwt/jwt";
 import { ItemController } from "./item.controller";
 
 const ItemRouter = Router();
