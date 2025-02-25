@@ -16,12 +16,12 @@ const PrivateRouter: React.FC<PrivateRouteProps> = ({
   const location = useLocation();
 
   useEffect(() => {
-    if (!token) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    !token &&
       navigate(`/${ROUTES_NAMES.LOGIN}`, {
         state: { from: location.pathname },
         replace: true,
       });
-    }
   }, [token, location.pathname, navigate]);
 
   return token ? <Component /> : <LoginPage />;
