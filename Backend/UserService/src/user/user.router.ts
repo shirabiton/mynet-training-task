@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { wrapAsyncMiddleware } from "../../../../Libs/src/utils/helper/wrapper";
+import { wrapAsyncMiddleware } from "../../../../Libs/src/server/wrapper";
 import { UserController } from "./user.controller";
 
 const UserRouter = Router();

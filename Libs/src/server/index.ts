@@ -2,23 +2,17 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import dotenv from "dotenv";
 import express, { Router } from "express";
-import { errorCatcherMiddleware } from "../utils/errors/middlewares";
+import { errorCatcherMiddleware } from "../server/errors/middlewares";
+import { CORS_OPTIONS } from "./consts";
 
 export const initApp = (AppRouter: Router, port: number) => {
   const app = express();
-  
+
   dotenv.config();
 
   app.use(express.json());
 
-  app.use(
-    cors({
-      origin: "http://localhost:5173",
-      methods: ["GET", "POST", "PUT", "DELETE"],
-      credentials: true,
-      allowedHeaders: ["Content-Type", "Authorization"],
-    })
-  );
+  app.use(cors(CORS_OPTIONS));
 
   app.use(cookieParser());
 

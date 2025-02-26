@@ -1,5 +1,5 @@
 import { Item } from "../../../../Libs/src/types/DB/item.type";
-import { throwNotFoundError } from "../../../../Libs/src/utils/errors/errors-generator";
+import { throwNotFoundError } from "../../../../Libs/src/server/errors/errors-generator";
 import { ItemRepository } from "./item.repository";
 
 export const ItemManager = {

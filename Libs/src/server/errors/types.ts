@@ -1,6 +1,6 @@
 import { HttpStatusCode } from "axios";
 
-export type httpError = {
+export type HttpError = {
   message: string;
   code: HttpStatusCode;
 };

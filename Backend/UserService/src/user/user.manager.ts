@@ -1,18 +1,18 @@
 import { sign, verify } from "jsonwebtoken";
 import { flow, map, toLower, trim } from "lodash/fp";
-import { FetchedUser, User } from "../../../../Libs/src/types/DB/user.types";
 import {
   throwBadRequestError,
   throwNotFoundError,
   throwUnauthorizedError,
-} from "../../../../Libs/src/utils/errors/errors-generator";
+} from "../../../../Libs/src/server/errors/errors-generator";
+import { FetchedUser, User } from "../../../../Libs/src/types/DB/user.types";
 import config from "../config";
 import { filterUserData } from "./../../../../Libs/src/server/functions";
 import { UserRepository } from "./user.repository";
 
 export const UserManager = {
   getAll: async (): Promise<FetchedUser[]> =>
-    map((user) => filterUserData(user), await UserRepository.getAll()),
+    map(filterUserData, await UserRepository.getAll()),
 
   getUserById: async (id: string): Promise<FetchedUser> => {
     const user = await UserRepository.getUserById(id);
@@ -23,9 +23,9 @@ export const UserManager = {
   },
 
   getUserByEmail: async (email: string): Promise<User | null> => {
-    const formatted = flow(decodeURIComponent, trim, toLower)(email);
+    const formattedEmail = flow(decodeURIComponent, trim, toLower)(email);
 
-    return await UserRepository.getUserByEmail(formatted);
+    return await UserRepository.getUserByEmail(formattedEmail);
   },
 
   generateToken: async (

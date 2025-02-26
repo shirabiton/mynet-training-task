@@ -2,8 +2,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const { PORT = 3002 } = process.env;
-const { JWT_SECRET_KEY } = process.env;
+const { PORT = 3002, JWT_SECRET_KEY } = process.env;
 
 const config = {
   PORT: Number(PORT),
