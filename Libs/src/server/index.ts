@@ -1,14 +1,11 @@
 import cookieParser from "cookie-parser";
 import cors from "cors";
-import dotenv from "dotenv";
 import express, { Router } from "express";
 import { errorCatcherMiddleware } from "../server/errors/middlewares";
 import { CORS_OPTIONS } from "./consts";
 
 export const initApp = (AppRouter: Router, port: number) => {
   const app = express();
-
-  dotenv.config();
 
   app.use(express.json());
 

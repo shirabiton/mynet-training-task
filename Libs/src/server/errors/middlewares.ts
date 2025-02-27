@@ -1,5 +1,5 @@
+import { HttpStatusCode } from "axios";
 import { ErrorRequestHandler } from "express";
-import { throwInternalServerError } from "./errors-generator";
 import { isHttpError } from "./functions";
 
 export const errorCatcherMiddleware: ErrorRequestHandler = (
@@ -8,9 +8,13 @@ export const errorCatcherMiddleware: ErrorRequestHandler = (
   res,
   next
 ) => {
-  const { message, code } = isHttpError(error)
+  const { message, code } =error
+   isHttpError(error)
     ? error
-    : throwInternalServerError(error.message || "Internal server error");
+    : {
+        message: error?.message || "Internal server error",
+        code: HttpStatusCode.InternalServerError,
+      };
 
   res.status(code).send({ code, message });
 };
