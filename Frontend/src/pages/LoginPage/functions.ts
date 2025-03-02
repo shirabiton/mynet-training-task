@@ -10,6 +10,8 @@ export const handleSubmit = async (
   ) => void
 ) => {
   e.preventDefault();
-  
-  return await UserService.logIn(email, password, navigate);
+
+  return await UserService.logIn(email, password, navigate).catch(() =>
+    alert("login failed, please try again")
+  );
 };

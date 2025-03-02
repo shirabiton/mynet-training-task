@@ -8,8 +8,7 @@ export const errorCatcherMiddleware: ErrorRequestHandler = (
   res,
   next
 ) => {
-  const { message, code } =error
-   isHttpError(error)
+  const { message, code } = isHttpError(error)
     ? error
     : {
         message: error?.message || "Internal server error",
