@@ -4,9 +4,6 @@
     "module": "commonjs",
     "esModuleInterop": true,
     "strict": true,
-    "resolveJsonModule": true,
-    "paths": {
-      "@Libs/*": ["../../Libs/src/*"]
-    }
+    "resolveJsonModule": true
   }
 }

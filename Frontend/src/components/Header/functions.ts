@@ -11,7 +11,6 @@ export const toggleLogin = async (
   ) => void
 ) => {
   const token = cookies[COOKIES.TOKEN];
-  console.log("header component, token:", token);
 
   const currentUserName = cookies[COOKIES.CURRENT_USER_NAME];
 

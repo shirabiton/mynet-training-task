@@ -1,5 +1,5 @@
-import { User } from "@Libs/types/DB/user.types";
 import { find, matchesProperty } from "lodash/fp";
+import { User } from "../../../../Libs/src/types/DB/user.types";
 import users from "../mocks/users.json";
 
 export const UserRepository = {

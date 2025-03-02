@@ -1,6 +1,6 @@
-import { Item } from "@Libs/types/DB/item.type";
 import { find, matchesProperty } from "lodash/fp";
 import items from "../mocks/items.json";
+import { Item } from "./../../../../Libs/src/types/DB/item.type";
 
 export const ItemRepository = {
   getAll: async (): Promise<Item[]> => items,
